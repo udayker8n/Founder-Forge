@@ -1,0 +1,18 @@
+# Quick Supabase Setup Guide for FounderForge
+
+## VSCode Setup (Terminal Commands)
+
+1. Open your project in VSCode and run these commands in the terminal:
+
+```bash
+# Remove Prisma dependencies
+npm uninstall prisma @prisma/client
+
+# Install Supabase client
+npm install @supabase/supabase-js
+
+# Create .env file with Supabase credentials
+echo "SUPABASE_URL=your-supabase-url
+SUPABASE_ANON_KEY=your-supabase-anon-key
+ADMIN_SECRET_TOKEN=admin" > .env
+
