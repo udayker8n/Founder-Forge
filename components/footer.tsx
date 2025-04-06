@@ -17,15 +17,15 @@ export default function Footer() {
 
       
       <div className="flex justify-center space-x-6 mb-6 sm:mb-8">
-        <a href="#" className="text-gray-400 hover:text-[#D4B98C] transition-colors">
+        <a href="https://x.com/founderforgee" className="text-gray-400 hover:text-[#D4B98C] transition-colors">
           <Twitter size={16} className="sm:w-5 sm:h-5" />
           <span className="sr-only">Twitter</span>
         </a>
-        <a href="#" className="text-gray-400 hover:text-[#D4B98C] transition-colors">
+        <a href="https://www.instagram.com/founder.forge/" className="text-gray-400 hover:text-[#D4B98C] transition-colors">
           <Instagram size={16} className="sm:w-5 sm:h-5" />
           <span className="sr-only">Instagram</span>
         </a>
-        <a href="#" className="text-gray-400 hover:text-[#D4B98C] transition-colors">
+        <a href="https://discord.gg/gWJMWHPj" className="text-gray-400 hover:text-[#D4B98C] transition-colors">
         <FaDiscord size={16} className="sm:w-5 sm:h-5" />
           <span className="sr-only">Discord</span>
         </a>
