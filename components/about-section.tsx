@@ -45,7 +45,7 @@ export default function AboutSection() {
           <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-[#D4B98C]">Our Solution</h3>
           <p className="text-sm sm:text-base text-[#E8E3D9] leading-relaxed">
             FounderForge creates direct, one-on-one connections between emerging entrepreneurs and founders who have
-            built and scaled successful companies worth $10M+.
+            built and scaled successful companies worth $100M+.
           </p>
           <p className="text-sm sm:text-base text-[#E8E3D9] leading-relaxed mt-3 sm:mt-4">
             Our platform facilitates meaningful conversations through seamless communication channels, allowing for

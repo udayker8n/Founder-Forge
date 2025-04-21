@@ -15,8 +15,8 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "FounderForge | The World's Most Exclusive Founder Network",
   description:
-    "Connect with elite founders who've built $10M+ businesses. Get battle-tested execution insights with no theory, no fluff.",
-  generator: "v0.dev",
+    "Connect with elite founders who've built $100M+ businesses. Get battle-tested execution insights with no theory, no fluff.",
+  generator: "ff",
 };
 
 export const viewport: Viewport = {

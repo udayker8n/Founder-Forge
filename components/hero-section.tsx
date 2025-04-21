@@ -41,7 +41,7 @@ export default function HeroSection() {
         </p>
         <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base leading-relaxed text-[#A9A9A9]">
           Our platform connects emerging entrepreneurs with founders who have built and scaled successful companies
-          worth $10M+.
+          worth $100M+.
         </p>
       </motion.div>
 
