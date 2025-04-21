@@ -7,7 +7,7 @@ const features = [
   {
     icon: <Users size={20} />,
     title: "Elite Founder Network",
-    description: "Connect with founders who've built $10M+ companies across diverse industries and markets.",
+    description: "Connect with founders who've built $100M+ companies across diverse industries and markets.",
   },
   {
     icon: <Calendar size={20} />,
