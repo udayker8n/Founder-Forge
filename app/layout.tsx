@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   description:
     "Connect with elite founders who've built $100M+ businesses. Get battle-tested execution insights with no theory, no fluff.",
   generator: "ff",
+  icons: {
+    icon: "/favicon.ico",
+},
 };
 
 export const viewport: Viewport = {
