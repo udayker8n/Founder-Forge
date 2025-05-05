@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { ArrowRight, Loader2, AlertCircle, CheckCircle } from "lucide-react"
 import { submitEmail } from "@/app/actions/email-actions"
 import type { SubmissionResult } from "@/app/actions/email-actions"
+import LayoutContainer from "./layout-container"
 
 export default function EmailCapture() {
   const [email, setEmail] = useState("")
@@ -73,122 +74,146 @@ export default function EmailCapture() {
     }
   }, [error])
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  }
+
   return (
-    <div className="w-full max-w-xl mx-auto flex flex-col justify-center h-full">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-6 sm:mb-8"
-      >
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#E8E3D9] to-[#D4B98C]">
-          Request Exclusive Access
-        </h2>
-        <div className="w-16 sm:w-20 h-0.5 sm:h-1 bg-gradient-to-r from-[#D4B98C] to-[#A67C52] mx-auto mb-4 sm:mb-6"></div>
-        <p className="text-sm sm:text-base text-[#A9A9A9] max-w-md mx-auto px-4">
-          Join our waitlist to be among the first to connect with our elite founder network.
-        </p>
-      </motion.div>
+    <section id="request-access" className="relative py-20 scroll-mt-20">
+      <LayoutContainer>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+          className="bg-white/80 backdrop-blur-md rounded-2xl p-6 sm:p-8 shadow-xl border border-gray-200"
+        >
+          <motion.div variants={itemVariants} className="text-center mb-8 sm:mb-10">
+            <span className="inline-block px-3 py-1 bg-gray-100 rounded-full text-xs font-medium text-gray-800 mb-3">
+              LIMITED AVAILABILITY
+            </span>
+            <h2 className="text-2xl md:text-3xl font-serif font-medium text-gray-900">Request Exclusive Access</h2>
+            <p className="text-gray-600 max-w-xl mx-auto mt-4 text-sm">
+              Join our waitlist to be among the first to connect with our elite founder network.
+            </p>
+          </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className={`
-          relative backdrop-blur-md rounded-xl p-1 mx-4
-          ${focused ? "bg-gradient-to-r from-[#D4B98C]/30 to-[#A67C52]/30" : "bg-white/5"}
-          transition-colors duration-300 border border-[#D4B98C]/10
-          shadow-lg
-        `}
-      >
-        {!result?.success ? (
-          <form onSubmit={handleSubmit} className="relative">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onFocus={() => setFocused(true)}
-              onBlur={() => setFocused(false)}
-              placeholder="Enter your email"
-              className="w-full bg-black/40 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-lg focus:outline-none text-sm sm:text-base"
-              required
-              disabled={isSubmitting}
-              aria-label="Email address"
-              aria-invalid={error ? "true" : "false"}
-              aria-describedby={error ? "email-error" : undefined}
-            />
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2
-                bg-gradient-to-r from-[#D4B98C] to-[#A67C52]
-                text-black font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full
-                flex items-center space-x-1 sm:space-x-2
-                transition-colors duration-300 text-xs sm:text-sm 
-                hover:from-[#E8E3D9] hover:to-[#D4B98C]
-                disabled:opacity-70 disabled:cursor-not-allowed"
-              aria-label="Submit email"
+          <motion.div variants={itemVariants} className="max-w-md mx-auto">
+            <motion.div
+              initial={{ scale: 1 }}
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              className="relative rounded-md p-1 mx-4"
             >
-              {isSubmitting ? (
-                <>
-                  <Loader2 size={14} className="animate-spin" />
-                  <span>Submitting...</span>
-                </>
+              {!result?.success ? (
+                <form onSubmit={handleSubmit} className="relative">
+                  <div className="flex flex-col sm:flex-row overflow-hidden rounded-full shadow-sm">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      onFocus={() => setFocused(true)}
+                      onBlur={() => setFocused(false)}
+                      placeholder="Enter your email"
+                      className={`w-full bg-white px-5 py-3 sm:rounded-l-full rounded-t-full sm:rounded-tr-none focus:outline-none focus:ring-2 focus:ring-gray-300 text-sm transition-all duration-300 border ${
+                        focused ? "border-gray-400" : "border-gray-200"
+                      }`}
+                      required
+                      disabled={isSubmitting}
+                      aria-label="Email address"
+                      aria-invalid={error ? "true" : "false"}
+                      aria-describedby={error ? "email-error" : undefined}
+                    />
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="bg-gray-900 hover:bg-black text-white font-medium px-6 py-3 sm:rounded-r-full rounded-b-full sm:rounded-bl-none
+                        flex items-center justify-center space-x-2
+                        transition-all duration-300 text-sm
+                        disabled:opacity-70 disabled:cursor-not-allowed"
+                      aria-label="Submit email"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 size={16} className="animate-spin" />
+                          <span>Submitting...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Request Access</span>
+                          <ArrowRight size={16} />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
               ) : (
-                <>
-                  <span>Request Access</span>
-                  <ArrowRight size={14} className="hidden sm:inline" />
-                </>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-4 px-4 sm:px-6 bg-gray-50 rounded-lg border border-gray-200"
+                >
+                  <div className="flex items-center justify-center mb-2">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                    >
+                      <CheckCircle className="text-green-500 mr-2" size={20} />
+                    </motion.div>
+                    <p className="text-gray-800 font-medium text-sm">{result.message}</p>
+                  </div>
+                  <p className="text-gray-600 text-xs mt-2">We'll be in touch with exclusive access details.</p>
+                </motion.div>
               )}
-            </button>
-          </form>
-        ) : (
-          <div className="text-center py-4 px-4 sm:px-6">
-            <div className="flex items-center justify-center mb-2">
-              <CheckCircle className="text-[#D4B98C] mr-2" size={20} />
-              <p className="text-[#D4B98C] font-medium text-sm sm:text-base">{result.message}</p>
-            </div>
-            <p className="text-gray-400 text-xs sm:text-sm mt-2">We'll be in touch with exclusive access details.</p>
-          </div>
-        )}
 
-        {/* Error message */}
-        {result && !result.success && (
-          <div
-            id="email-error"
-            className="text-center mt-2 text-red-400 text-xs sm:text-sm px-4 py-1 flex items-center justify-center"
-          >
-            <AlertCircle size={12} className="mr-1" />
-            {result.message}
-          </div>
-        )}
+              {/* Error message */}
+              {result && !result.success && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  id="email-error"
+                  className="text-center mt-2 text-red-500 text-xs px-4 py-1 flex items-center justify-center"
+                >
+                  <AlertCircle size={12} className="mr-1" />
+                  {result.message}
+                </motion.div>
+              )}
 
-        {/* Validation error message */}
-        {error && (
-          <div
-            id="email-error"
-            className="text-center mt-2 text-red-400 text-xs sm:text-sm px-4 py-1 flex items-center justify-center"
-          >
-            <AlertCircle size={12} className="mr-1" />
-            {error}
-          </div>
-        )}
-      </motion.div>
+              {/* Validation error message */}
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  id="email-error"
+                  className="text-center mt-2 text-red-500 text-xs px-4 py-1 flex items-center justify-center"
+                >
+                  <AlertCircle size={12} className="mr-1" />
+                  {error}
+                </motion.div>
+              )}
+            </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        className="mt-8 sm:mt-10 text-center px-4"
-      >
-        <div className="inline-block backdrop-blur-sm bg-gradient-to-r from-[#D4B98C]/10 to-[#A67C52]/10 rounded-lg px-4 sm:px-6 py-3 sm:py-4 border border-[#D4B98C]/20">
-          <p className="text-xs sm:text-sm text-[#E8E3D9]">
-            <span className="font-semibold">Why join the waitlist?</span> We're carefully curating our community to
-            ensure the highest quality experience.
-          </p>
-        </div>
-      </motion.div>
-    </div>
+            <motion.div variants={itemVariants} className="mt-8 text-center">
+              <p className="text-xs text-gray-500">
+                <span className="font-semibold">Why join the waitlist?</span> We're carefully curating our community to
+                ensure the highest quality experience.
+              </p>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </LayoutContainer>
+    </section>
   )
 }
-

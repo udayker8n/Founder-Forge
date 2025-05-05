@@ -1,9 +1,33 @@
-import type { ReactNode } from "react"
+import type React from "react"
 import "./globals.css"
-import type { Metadata, Viewport } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Playfair_Display } from "next/font/google"
+import type { Metadata } from "next"
 
-const inter = Inter({ subsets: ["latin"] })
+
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-playfair",
+})
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+})
+
+
+
+export const metadata: Metadata = {
+  title: "FounderForge - The World's Most Exclusive Founder Network",
+  description:
+    "Connect with elite founders who've built $10M+ businesses. Get battle-tested execution insights with no theory, no fluff.",
+    generator: "ff",
+  icons: {
+    icon: "/lst-one.ico",
+},
+}
 
 // export const metadata: Metadata = {
 //   title: "FounderForge | The World's Most Exclusive Founder Network",
@@ -12,35 +36,19 @@ const inter = Inter({ subsets: ["latin"] })
 //   viewport: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
 //     generator: 'v0.dev'
 // }
-export const metadata: Metadata = {
-  title: "FounderForge | The World's Most Exclusive Founder Network",
-  description:
-    "Connect with elite founders who've built $100M+ businesses. Get battle-tested execution insights with no theory, no fluff.",
-  generator: "ff",
-  icons: {
-    icon: "/lst-one.ico",
-},
-};
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1.0,
-  maximumScale: 1.0,
-  userScalable: false,
-};
 
 export default function RootLayout({
   children,
 }: {
-  children: ReactNode
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
+      <body className="bg-white text-black antialiased">{children}</body>
     </html>
   )
 }
-
-
-
-import './globals.css'

@@ -1,53 +1,83 @@
-import { Twitter, Instagram, Linkedin } from "lucide-react";
+"use client"
 import { FaDiscord } from "react-icons/fa";
-
+import { motion } from "framer-motion"
+import { Twitter, Instagram } from "lucide-react"
+import LayoutContainer from "./layout-container"
 
 export default function Footer() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  }
+
   return (
-    <div className="w-full max-w-4xl mx-auto flex flex-col justify-center h-full">
-      <div className="text-center mb-6 sm:mb-8 px-4">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#E8E3D9] to-[#D4B98C]">
-          Join FounderForge Today
-        </h2>
-        <div className="w-16 sm:w-20 h-0.5 sm:h-1 bg-gradient-to-r from-[#D4B98C] to-[#A67C52] mx-auto mb-4 sm:mb-6"></div>
-        <p className="text-sm sm:text-base text-[#A9A9A9] max-w-md mx-auto">
-          Request access now to be among the first to experience the power of elite founder connections.
-        </p>
-      </div>
+    <footer className="relative py-16 border-t border-gray-200">
+      <LayoutContainer>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+        >
+          <motion.div variants={itemVariants} className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-serif font-medium text-gray-900">
+              Join FounderForge Today
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto mt-4 text-sm">
+              Request access now to be among the first to experience the power of elite founder connections.
+            </p>
+          </motion.div>
 
-      
-      <div className="flex justify-center space-x-6 mb-6 sm:mb-8">
-        <a href="https://x.com/founderforgee" className="text-gray-400 hover:text-[#D4B98C] transition-colors">
-          <Twitter size={16} className="sm:w-5 sm:h-5" />
-          <span className="sr-only">Twitter</span>
-        </a>
-        <a href="https://www.instagram.com/founder.forge/" className="text-gray-400 hover:text-[#D4B98C] transition-colors">
-          <Instagram size={16} className="sm:w-5 sm:h-5" />
-          <span className="sr-only">Instagram</span>
-        </a>
-        <a href="https://discord.gg/gWJMWHPj" className="text-gray-400 hover:text-[#D4B98C] transition-colors">
-        <FaDiscord size={16} className="sm:w-5 sm:h-5" />
-          <span className="sr-only">Discord</span>
-        </a>
-    
-        {/* <a href="#" className="text-gray-400 hover:text-[#D4B98C] transition-colors">
-          <Discord size={16} className="sm:w-5 sm:h-5" />
-          <span className="sr-only">Discord</span>
-        </a> */}
-      </div>
+          <motion.div variants={itemVariants} className="flex justify-center space-x-6 mb-10">
+            {[
+              {
+                icon: <Twitter size={20} />,
+                label: "Twitter",
+                link: "https://twitter.com/founderforgee",
+              },
+              {
+                icon: <Instagram size={20} />,
+                label: "Instagram",
+                link: "https://instagram.com/founder.forge/",
+              },
+              {
+                icon: <FaDiscord size={20} />,
+                label: "Discord",
+                link: "https://discord.gg/78qBVP3hJU",
+              },
+            ].map((item, index) => (
+              <motion.a
+                key={index}
+                href={item.link} // ✅ Correct usage
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, y: -2 }}
+                whileTap={{ scale: 0.9 }}
+                className="text-gray-600 hover:text-gray-900 transition-colors p-2 bg-gray-100 rounded-full"
+                aria-label={item.label}
+              >
+                {item.icon}
+              </motion.a>
+            ))}
+          </motion.div>
 
-      {/* <div className="border-t border-[#D4B98C]/10 pt-4 sm:pt-6 text-center mx-4">
-        <p className="text-xs text-gray-500">&copy; {new Date().getFullYear()} FounderForge. All rights reserved.</p>
-        <div className="mt-3 sm:mt-4 flex justify-center space-x-4 sm:space-x-6">
-          <a href="#" className="text-xs text-gray-500 hover:text-[#D4B98C] transition-colors">
-            Privacy Policy
-          </a>
-          <a href="#" className="text-xs text-gray-500 hover:text-[#D4B98C] transition-colors">
-            Terms of Service
-          </a>
-        </div>
-      </div> */}
-    </div>
+          <motion.div variants={itemVariants} className="border-t border-gray-100 pt-8 text-center">
+            <p className="text-gray-500 text-xs">
+              &copy; {new Date().getFullYear()} FounderForge. All rights reserved.
+            </p>
+          </motion.div>
+        </motion.div>
+      </LayoutContainer>
+    </footer>
   )
 }
-

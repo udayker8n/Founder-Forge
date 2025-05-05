@@ -1,60 +1,91 @@
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 17, 17, 17;
-  --background-end-rgb: 0, 0, 0;
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
 }
 
-html,
-body {
-  max-width: 100%;
-  overflow-x: hidden;
-  height: 100%;
-  touch-action: manipulation;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: none;
-  overscroll-behavior-x: none;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, rgb(var(--background-start-rgb)), rgb(var(--background-end-rgb))) fixed;
-  font-size: clamp(0.875rem, 2vw, 1rem);
+  background: rgb(var(--background-rgb));
+  min-height: 100vh;
 }
 
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
+  }
 
-.content-wrapper {
-  transform: translateZ(0);
-  will-change: transform;
-}
+  body {
+    @apply font-sans;
+  }
 
-@media (prefers-reduced-motion) {
-  * {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
+  section {
+    @apply scroll-mt-20;
   }
 }
 
-@media (min-width: 768px) {
-  html {
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'><circle cx='12' cy='12' r='10'/></svg>")
-      12 12, auto;
-  }
-
-  a,
-  button,
-  input,
-  select,
-  textarea {
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23D4B98C' stroke-width='2'><circle cx='12' cy='12' r='10'/></svg>")
-      12 12, auto !important;
-  }
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(79, 70, 229, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 70, 229, 0.3);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  @apply bg-gradient-to-r from-indigo-800 to-blue-600 bg-clip-text text-transparent;
+}
+
+/* Card hover effect */
+.hover-card {
+  @apply transition-all duration-300;
+}
+
+.hover-card:hover {
+  @apply transform -translate-y-1 shadow-lg;
+}
+
+/* Animated background gradient */
+.animated-gradient {
+  background: linear-gradient(-45deg, #f5f7ff, #ffffff, #eef2ff, #f5f7ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
